@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon src/index.js",
@@ -23,10 +23,10 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "mongodb": "^4.12.0",
-    "notenv": "^2.0.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
