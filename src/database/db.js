@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
@@ -13,6 +14,6 @@ try {
 
 const db = mongoClient.db('buffstoreAPI');
 
-const usersCollection = db.collection('users');
-const productsCollection = db.collection('products');
-const cartCollection = db.collection('cart');
+export const usersCollection = db.collection('users');
+export const productsCollection = db.collection('products');
+export const cartCollection = db.collection('cart');
