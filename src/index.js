@@ -1,20 +1,17 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import usersRoutes from './routers/users.router.js'
-
-import './database/db.js';
-
-import productRouters from './routers/products.routes.js';
+import usersRouter from './routers/users.router.js';
+import productRouter from './routers/products.router.js';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(usersRoutes);
+app.use(usersRouter);
 
-app.use(productRouters);
+app.use(productRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('App running in port ', port));
