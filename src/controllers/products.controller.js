@@ -20,3 +20,14 @@ export async function addProduct(req, res) {
 		res.sendStatus(500);
 	}
 }
+
+export async function getAllProducts(req, res) {
+	try {
+		const products = await productsCollection.find().toArray();
+
+		res.send(products);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+}
