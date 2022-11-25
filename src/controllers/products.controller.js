@@ -35,7 +35,6 @@ export async function getAllProducts(req, res) {
 
 export async function getOneProduct(req, res) {
 	const { id } = req.params;
-	console.log(req.params);
 
 	try {
 		const product = await productsCollection.findOne({ _id: ObjectId(id) });
