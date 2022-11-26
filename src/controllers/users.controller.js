@@ -59,10 +59,10 @@ export async function signIn(req, res) {
 }
 
 export async function signOut(req, res) {
-	const { sessionUserID } = req.params;
+	const { token } = req.params;
 
 	try {
-		await sessionsCollection.deleteOne({ userId: ObjectId(sessionUserID) });
+		await sessionsCollection.deleteOne({ token });
 		res.status(200).send({ message: 'Usuário deslogado com sucesso!' });
 	} catch (err) {
 		console.log(err);

@@ -23,7 +23,7 @@ export async function signInBodyValidation(req, res, next) {
     // verify password
     const rightPassword = bcrypt.compareSync(password, userExists.password);
     if (!rightPassword) {
-      return res.sendStatus(401);
+      return res.status(401).send({message: "Senha incorreta!"});
     }
   
     next();
