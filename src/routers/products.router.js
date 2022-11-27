@@ -3,6 +3,7 @@ import {
 	addProduct,
 	addToCart,
 	getAllProducts,
+	getCart,
 	getOneProduct,
 } from '../controllers/products.controller.js';
 
@@ -15,5 +16,7 @@ router.get('/products', getAllProducts);
 router.get('/products/:id', getOneProduct);
 
 router.post('/addtocart', addToCart);
+
+router.get('/cart', getCart);
 
 export default router;

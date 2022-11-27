@@ -59,7 +59,8 @@ export async function signIn(req, res) {
 }
 
 export async function signOut(req, res) {
-	const { token } = req.params;
+	const { authorization } = req.headers;
+	const token = authorization.replace('Bearer ', '');
 
 	try {
 		await sessionsCollection.deleteOne({ token });

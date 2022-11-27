@@ -7,6 +7,6 @@ const router = Router();
 
 router.post("/sign-up", signUpBodyValidation, signUp);
 router.post("/sign-in", signInBodyValidation, signIn);
-router.delete("/sign-out/:token", signOut)
+router.delete("/sign-out", signOut)
 
 export default router;
