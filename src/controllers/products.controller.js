@@ -90,14 +90,7 @@ export async function getCart(req, res){
 	const cartExists = await cartCollection.findOne({
 		userId: session.userId,
 	});
-	if (!cartExists) {
-		await cartCollection.insertOne({
-			userId: session.userId,
-			products: [productId],
-		});
-		res.sendStatus(200);
-		return;
-	}
+	
 	res.send(cartExists)
 	} catch (err) {
 		console.log(err);
