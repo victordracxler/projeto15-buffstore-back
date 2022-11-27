@@ -79,3 +79,28 @@ export async function addToCart(req, res) {
 		res.sendStatus(500);
 	}
 }
+
+export async function getCart(req, res){
+	const { authorization } = req.headers;
+	const token = authorization.replace('Bearer ', '');
+	
+	try{
+	const session = await sessionsCollection.findOne({ token });
+
+	const cartExists = await cartCollection.findOne({
+		userId: session.userId,
+	});
+	if (!cartExists) {
+		await cartCollection.insertOne({
+			userId: session.userId,
+			products: [productId],
+		});
+		res.sendStatus(200);
+		return;
+	}
+	res.send(cartExists)
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+}
