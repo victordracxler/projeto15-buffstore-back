@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import {
 	cartCollection,
+	ordersCollection,
 	productsCollection,
 	sessionsCollection,
 } from '../database/db.js';
@@ -80,18 +81,48 @@ export async function addToCart(req, res) {
 	}
 }
 
-export async function getCart(req, res){
+export async function getCart(req, res) {
 	const { authorization } = req.headers;
 	const token = authorization.replace('Bearer ', '');
-	
-	try{
-	const session = await sessionsCollection.findOne({ token });
 
-	const cartExists = await cartCollection.findOne({
-		userId: session.userId,
-	});
-	
-	res.send(cartExists)
+	try {
+		const session = await sessionsCollection.findOne({ token });
+
+		const cartExists = await cartCollection.findOne({
+			userId: session.userId,
+		});
+
+		res.send(cartExists);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+}
+
+export async function checkout(req, res) {
+	const { authorization } = req.headers;
+	const token = authorization.replace('Bearer ', '');
+	const { address, totalPrice } = req.body;
+
+	try {
+		const session = await sessionsCollection.findOne({ token: token });
+		const userId = session.userId;
+
+		const cart = await cartCollection.findOne({ userId });
+		const products = cart.products;
+
+		const object = {
+			userId,
+			date: Date.now(),
+			address,
+			products,
+			totalPrice,
+		};
+
+		await ordersCollection.insertOne(object);
+		await cartCollection.deleteOne({ userId });
+
+		res.sendStatus(200);
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);
