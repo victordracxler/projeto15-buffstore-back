@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
 	addProduct,
 	addToCart,
+	checkout,
 	getAllProducts,
 	getCart,
 	getOneProduct,
@@ -18,5 +19,7 @@ router.get('/products/:id', getOneProduct);
 router.post('/addtocart', addToCart);
 
 router.get('/cart', getCart);
+
+router.post('/checkout', checkout);
 
 export default router;
